@@ -16,7 +16,7 @@ def deleteDuplicate(directoryName, duplicates):
 	for img in duplicates:
 		print (img)
 		os.remove(directoryPath + "/" + img)
-	print len(duplicates), "files deleted."
+	print (len(duplicates), "files deleted.")
 
 
 def getDuplicate(images, imageHash):
