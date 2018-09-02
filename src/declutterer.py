@@ -10,20 +10,23 @@ def declutter(directoryName):
 	deleteDuplicate(directoryName, duplicates)
 	return
 
+## Deletes duplicate images from directory
 def deleteDuplicate(directoryName, duplicates):
 	directoryPath = "./" + directoryName
 	print ("Deleting...")
 	for img in duplicates:
-		print (img)
+		print ("    " + img)
 		os.remove(directoryPath + "/" + img)
-	print (len(duplicates), "files deleted.")
+	print (str(len(duplicates)) + " files deleted.")
 
 
+## Creates a list of duplicate images
 def getDuplicate(images, imageHash):
 	duplicates = []
 	i = 0
 	for hash in imageHash:
-		if countOccurence(imageHash, hash) > 1:
+		count = countOccurence(imageHash, hash)
+		if count > 1:
 			duplicates.append(images[i])
 			images.remove(images[i])
 			imageHash.remove(imageHash[i])
@@ -31,6 +34,7 @@ def getDuplicate(images, imageHash):
 
 	return duplicates
 
+## Gets the hashes of all images in the directory
 def getHashList(images, directoryName):
 	imageHash = []
 	key = get_key()
@@ -39,17 +43,22 @@ def getHashList(images, directoryName):
 		imageHash.append(getHash(key, imgPath))
 	return imageHash
 
+## Finds the number of times a hash occurs in the list
 def countOccurence(lst, elem):
 	count = 0
 	for element in lst:
-		if element == elem: count += 1
+		if element == elem: 
+			count += 1
+
 	return count
 
+## Gets image file names
 def getImages(directoryName):
 	directoryPath = "./" + directoryName
 	images = [img for img in listdir(directoryPath) if isfile(join(directoryPath, img))]
 	return images
 
+## Creates a poly1305 hash for an image
 def getHash(key, imagePath):
 	image = open(imagePath, 'r')
 	content = image.read()
