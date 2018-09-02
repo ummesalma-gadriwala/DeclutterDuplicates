@@ -7,7 +7,7 @@ def declutter(directoryName):
 	images = getImages(directoryName)
 	imageHash = getHashList(images, directoryName)
 	duplicates = getDuplicate(images, imageHash)
-	deleteDuplicate("test_images", duplicates)
+	deleteDuplicate(directoryName, duplicates)
 	return
 
 def deleteDuplicate(directoryName, duplicates):
